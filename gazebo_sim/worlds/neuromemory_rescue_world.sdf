@@ -1,0 +1,229 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="neuromemory_rescue_world">
+
+    <!-- ===================================================== -->
+    <!-- NeuroMemory Robot - Gazebo Rescue World Skeleton       -->
+    <!-- Purpose: Gazebo-ready 3D rescue environment concept    -->
+    <!-- ===================================================== -->
+
+    <physics name="default_physics" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <scene>
+      <ambient>0.35 0.35 0.35 1</ambient>
+      <background>0.03 0.04 0.05 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <!-- Sun light -->
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.75 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.4 0.2 -1</direction>
+    </light>
+
+    <!-- Ground plane -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="ground_link">
+        <collision name="ground_collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>30 30</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="ground_visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>30 30</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.18 0.18 0.18 1</ambient>
+            <diffuse>0.25 0.25 0.25 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Rescue robot model -->
+    <include>
+      <uri>model://rescue_robot</uri>
+      <name>rescue_robot</name>
+      <pose>-5 -3 0.12 0 0 0</pose>
+    </include>
+
+    <!-- Survivor / target placeholder -->
+    <model name="survivor_candidate">
+      <static>true</static>
+      <pose>4 2 0.9 0 0 0</pose>
+      <link name="survivor_link">
+        <visual name="body_visual">
+          <geometry>
+            <cylinder>
+              <radius>0.25</radius>
+              <length>1.5</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.1 0.35 0.9 1</ambient>
+            <diffuse>0.1 0.35 0.9 1</diffuse>
+          </material>
+        </visual>
+        <collision name="body_collision">
+          <geometry>
+            <cylinder>
+              <radius>0.25</radius>
+              <length>1.5</length>
+            </cylinder>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- Debris blocks -->
+    <model name="debris_block_01">
+      <static>true</static>
+      <pose>-1 0 0.35 0 0 0.2</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>2.2 0.8 0.7</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>2.2 0.8 0.7</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.32 0.28 0.24 1</ambient>
+            <diffuse>0.45 0.38 0.32 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="debris_block_02">
+      <static>true</static>
+      <pose>2.5 -1.2 0.45 0 0 -0.35</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1.8 1.0 0.9</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1.8 1.0 0.9</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.28 0.26 0.23 1</ambient>
+            <diffuse>0.4 0.35 0.3 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="debris_block_03">
+      <static>true</static>
+      <pose>0.2 3.5 0.3 0 0 0.8</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>2.5 0.7 0.6</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>2.5 0.7 0.6</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.22 0.22 0.22 1</ambient>
+            <diffuse>0.35 0.35 0.35 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Low-visibility / smoke-like region represented as translucent volume -->
+    <model name="low_visibility_zone">
+      <static>true</static>
+      <pose>2.8 1.2 1.0 0 0 0</pose>
+      <link name="smoke_link">
+        <visual name="smoke_visual">
+          <geometry>
+            <box>
+              <size>3.2 2.4 2.0</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.7 0.25</ambient>
+            <diffuse>0.7 0.7 0.7 0.25</diffuse>
+            <transparency>0.65</transparency>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Risk zone marker on the ground -->
+    <model name="risk_zone_marker">
+      <static>true</static>
+      <pose>2.8 1.2 0.011 0 0 0</pose>
+      <link name="risk_zone_link">
+        <visual name="risk_zone_visual">
+          <geometry>
+            <box>
+              <size>3.4 2.6 0.02</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.9 0.4 0.1 0.4</ambient>
+            <diffuse>0.9 0.4 0.1 0.4</diffuse>
+            <transparency>0.55</transparency>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Camera viewpoint marker for next-best-view target -->
+    <model name="next_best_view_marker">
+      <static>true</static>
+      <pose>5.5 -0.8 0.15 0 0 0</pose>
+      <link name="marker_link">
+        <visual name="marker_visual">
+          <geometry>
+            <sphere>
+              <radius>0.18</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.0 0.8 0.55 1</ambient>
+            <diffuse>0.0 0.8 0.55 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>

@@ -1,0 +1,11 @@
+numpy
+matplotlib
+pillow
+pygame
+plotly
+kaleido
+# Optional for embedding/ReID validation:
+torch
+torchvision
+# torchreid is optional and may need manual installation depending on the environment.
+# Optional ROS 2 scripts require rclpy, std_msgs, and geometry_msgs from a ROS 2 installation.
