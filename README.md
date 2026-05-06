@@ -151,6 +151,34 @@ python src/run_full_evaluation.py
 
 This project is a research-oriented prototype. The current version focuses on simulation, visualization, evaluation, and robotics-system structuring. It is not presented as a deployed rescue robot or a clinically validated identification system.
 
+## Project Status
+
+This repository represents the first public version of the NeuroMemory Robotic Rescue System. The current version focuses on simulation-based scene generation, active visual-memory logic, uncertainty-aware re-observation, and rescue-environment visualization.
+
+The project is still under development. Future improvements may include deeper ROS 2 integration, more realistic robotic perception modules, extended Gazebo/Isaac Sim experiments, and validation with additional public datasets.
+
+## Dataset Note
+
+Large datasets and generated output folders are not included in this repository to keep the project lightweight and reproducible.
+
+If the sample re-identification module is used, place the required dataset archive manually under:
+
+```text
+data/archive.zip
+```
+
+For example, `src/select_reid_samples.py` expects the archive path to be:
+
+```python
+ZIP_PATH = Path("data/archive.zip")
+```
+
+Generated outputs should be saved locally under the `outputs/` folder. This folder is ignored by Git and is not intended to be uploaded directly.
+
+## Repository Notes
+
+This project follows a simulation-first engineering workflow. The repository is intended to demonstrate the system architecture, visual-memory concept, rescue-scene generation pipeline, and software structure rather than a finalized hardware deployment.
+
 ## License
 
 This project is released under the MIT License.
