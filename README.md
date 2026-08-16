@@ -34,7 +34,6 @@ neuromemory_robot/
 ├── generate_professional_rescue_scene.py
 ├── make_3d_render_collage.py
 ├── requirements.txt
-├── .gitignore
 └── README.md
 ```
 
